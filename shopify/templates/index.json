@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-index": {
+      "type": "main-index",
+      "settings": {}
+    },
+    "1d2f5b0d-e932-4cac-9a2d-4c348a75e38e": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "our best [inverted]sellers[inverted]",
+        "bg_image": "shopify://shop_images/nerdy-nuts-bg.png",
+        "padding_top": 80,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "main-index",
+    "1d2f5b0d-e932-4cac-9a2d-4c348a75e38e"
+  ]
+}

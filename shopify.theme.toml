@@ -1,0 +1,4 @@
+[environments.dev]
+store = "test-vadim-1"
+path = "."
+theme-editor-sync = true

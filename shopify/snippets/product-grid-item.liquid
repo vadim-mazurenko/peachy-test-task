@@ -1,0 +1,96 @@
+{% comment %}
+  Renders a product card
+  Accepts:
+  - add_to_cart_text: {String} Text for Add to Cart button
+  - sold_out_text: {String} Text for Add to Cart button (Sold Out)
+{% endcomment %}
+
+{%- if card_product.featured_image != blank -%}
+  <a href="{{ card_product.url }}">
+  {%- capture sizes -%}
+    (min-width: 1024px) calc((100vw - 236px) * 1 / 4),
+    (min-width: 750px) calc((100vw - 122px) * 1 / 2),
+    calc(100vw-60px)
+  {%- endcapture -%}
+    {{
+      card_product.featured_image
+      | image_url: width: 2097
+      | image_tag:
+        sizes: sizes,
+        widths: '174, 303, 315, 348, 352,418, 443, 522, 532, 606, 630, 699, 704, 836, 886, 909, 945, 1056, 1064, 1254, 1329, 1398, 1596, 2097'
+    }}
+  </a>
+{%- endif -%}
+
+<a href="{{ card_product.url }}">
+  <p class="featured-products_title">{{ card_product.title }}</p>
+</a>
+
+<form class="add-to-cart-form" data-cart-submit>
+  <variant-swatch>
+    {% if card_product.variants.size > 1 %}
+      <div class="custom-select" data-variant-availability>
+        <button class="featured-products_custom-select__trigger">
+          <span class="featured-products_custom-select__text">
+            {{- card_product.variants.first.title -}}
+          </span>
+          {% render 'icon-arrow' %}
+        </button>
+
+        <ul class="featured-products_custom-select__options">
+          {% for variant in card_product.variants %}
+            <li
+              class="custom-select__option"
+              data-price="{{ variant.price | money }}"
+              data-value="{{ variant.id }}"
+              data-max-available="{{ variant.inventory_quantity }}"
+              {% if variant.inventory_quantity > 0 %}
+                data-available="{{ variant.inventory_quantity }}"
+              {% else %}
+                data-available="0"
+              {% endif %}
+            >
+              {{ variant.title }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <input
+        type="hidden"
+        name="id"
+        class="selected-variant"
+        {% if card_product.selected_or_first_available_variant.inventory_quantity
+            > 0
+        %}
+          data-available="1"
+        {% else %}
+          data-available="0"
+        {% endif %}
+        value="{{ card_product.selected_or_first_available_variant.id }}"
+      >
+    {% else %}
+      <input
+        type="hidden"
+        name="id"
+        value="{{ card_product.selected_or_first_available_variant.id }}"
+        data-available="{{ card_product.selected_or_first_available_variant.inventory_quantity }}"
+      >
+    {% endif %}
+    <div class="featured-products_card-btn-wrapper">
+      <button type="submit" class="add-to-cart-button">
+        <div class="add-to-cart-button_text">
+          <span data-product-price>{{ card_product.price | money }} |</span>
+          {%- if add_to_cart_text != blank -%}
+            <span>{{ add_to_cart_text }}</span>
+          {%- endif -%}
+        </div>
+        {%- if add_to_cart_text != blank -%}
+          <div class="add-to-cart-button_text-disabled">
+            {{ sold_out_text }}
+            </div>
+        {%- endif -%}
+
+      </button>
+    </div>
+  </variant-swatch>
+</form>
