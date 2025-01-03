@@ -1,35 +1,17 @@
-# peachy-candidate
-
-## Task
-
-Implement functionality according to design (link in Sources). You can use provided theme or any other theme/scratch project.
-
-### Goals:
-
-1.  Products/variants should be added to cart by clicking the `add to cart` button (check CartJS docs);
-2.  Changing the `product variant (select dropdown)` should correctly change the `variant that will be added to the cart` (check CartJS docs);
-3.  Product cards should be `carousel on mobile` and `grid on desktop` and automatically change to `carousel view` or `grid view` depending on screen resolution;
-4.  Clicking the `Product Image` and `Product Title` should redirect to `Product Details Page` (no need to implement this page);
-
-## Docs
-
-Shopify CLI: https://shopify.dev/docs/themes/tools/cli/install
-CartJS: https://cartjs.org/pages/guide#data-api-submitting-forms
-
-## Setup steps
-
-1.  Install node modules `yarn install`;
-2.  Update `shopify.theme.toml` (replace `store = ""` with your's store address, e.g `store = "my-store"`);
-3.  Start Development `yarn start`;
-4.  Code the task;
-5.  Deploy `yarn deploy`.
 
 ## Note
-- Use latest version of Shopify CLI
-- You have everything you need in the provided theme to develop this page
-- Use `src` folder for your `css (scss)` and `js`;
-- `Tailwind` is optional but will be a plus;
+1.  Created the possibility to add Products/variants to the cart by clicking the "Add to cart" button
+ 2. Changing a product variant (created a custom dropdown, see point 3) changes the variant that will be added to the cart
+ 3. Created a custom dropdown for selecting variants. It is easier to customize and optimize than the default select. when changing an variant, the product price is recalculated. if some product  variant has a product availability = 0, then the ‘add to cart’ button becomes disabled and the   
+    text changes to ‘sold out’. (used custom elements) (Ideally,  needed to add functionality for tracking products in the cart. If they added more times than the product is available, then also need to make a ‘sold out’ button. For this, need to track the 'cart.requestComplete' event and 
+    compare the all variant ID option and reduce the quantity)
+ 4.Added icon snippet (used currentColor) also added Futura PT font-family
+ 5. Implemented carousel for Product Cards on mobile devices, and grids on desktops
+ 6. Clicking on the product image and product name will redirect to the product details page.
+ 7. Added section settings such as: choosing a picture for the background, title, top and bottom indents
+ 8. On mobile design part of the title has a different color and shadow. you can change it in the admin panel. just in the title field you need to specify the text that you want to see inside the [inverted]sellers[inverted] tags. in our case it is (sellers). in Liquid I created a filter that 
+    replaces everything inside this tag with text with a different color and shadow. (it was possible to implement an html field. need to срщщіу what is easier for the client to edit)
 
 ## Sources
 
-- Design - https://www.figma.com/file/BB5Ge3zMwyOt1CZ3FuWQaZ/peachy-candidate
+- https://test-vadim-1.myshopify.com?preview_theme_id=167300399412
